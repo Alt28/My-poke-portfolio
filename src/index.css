@@ -112,6 +112,21 @@ p { color: #d7e1dc; line-height: 1.7; }
 .text-glow { text-shadow:none; }.text-yellow {color:var(--yellow)}.text-light{color:#d7e1dc}.text-bright{color:#fff}.text-red{color:var(--red)}.text-blue{color:var(--blue)}
 .entry-number {color:var(--yellow);font:9px 'Press Start 2P'}.entry-title{font-size:12px;color:white}.entry-type{display:inline-block;padding:5px 8px;border-radius:5px;background:var(--red);font-size:10px}.entry-abilities{margin-top:16px}.inspect-btn{padding:10px;border:1px solid var(--yellow);background:transparent;color:var(--yellow);border-radius:6px;cursor:pointer}
 .site-footer { margin-top:auto; border-top:1px solid rgba(255,255,255,.08); padding:26px 16px; color:#77837f; text-align:center; font-size:12px; }
+.route-loader{min-height:55vh;display:flex;align-items:center;justify-content:center;gap:12px;color:#84938e;font:8px 'Press Start 2P'}
+.route-loader i,.battle-loading i{width:18px;height:18px;border:3px solid #46514e;border-top-color:var(--yellow);border-radius:50%;animation:loader-spin .7s linear infinite}
+.battle-loading{position:fixed;z-index:110;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;background:#111317;color:#d8e2de;font:8px 'Press Start 2P'}
+@keyframes loader-spin{to{transform:rotate(360deg)}}
+.home-hero-enter{animation:home-enter .55s ease-out both}
+.mission-preview-enter{animation:preview-enter .25s ease-out both}
+.skill-card-enter{animation:skill-enter .4s ease-out both}
+.skill-tag{transition:transform .16s ease}.skill-tag:hover{transform:scale(1.08)}
+.menu-backdrop-enter{animation:menu-fade .18s ease-out both}
+.pause-menu-enter{animation:menu-enter .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes home-enter{from{opacity:0;transform:translateY(16px)}}
+@keyframes preview-enter{from{opacity:0;transform:translateX(12px)}}
+@keyframes skill-enter{from{opacity:0;transform:translateY(20px)}}
+@keyframes menu-fade{from{opacity:0}}
+@keyframes menu-enter{from{opacity:0;transform:translateY(20px) scale(.94)}}
 
 /* Persistent game layer */
 .player-hud { position:fixed; z-index:19; top:91px; right:24px; width:205px; display:grid; grid-template-columns:38px 1fr; align-items:center; gap:10px; padding:10px; border:1px solid rgba(255,255,255,.1); border-radius:11px; background:rgba(18,20,24,.82); backdrop-filter:blur(12px); box-shadow:0 10px 25px rgba(0,0,0,.24); }
@@ -295,6 +310,14 @@ p { color: #d7e1dc; line-height: 1.7; }
   .battle-screen{height:330px}.battle-status{width:250px}.bug-sprite{right:75px}.trainer-sprite{left:70px}.player-pokemon{left:5px;width:290px;height:220px}.player-pokemon.is-mega{left:0;width:320px;height:220px}.enemy-shadow{right:35px}.player-shadow{left:20px;width:230px}.battle-console{grid-template-columns:1fr}.battle-message{min-height:94px}
 }
 @media (max-width: 600px) {
+  body:after{display:none}
+  .site-header{background:#111317;backdrop-filter:none}
+  .pokedex-unit{filter:none}
+  .radar-sweep{animation:none;transform:rotate(42deg);opacity:.6}
+  .pokemon-skill-card,.pokedex-entry,.card-base,.mission-list button{transition:none}
+  .home-hero-enter,.mission-preview-enter,.skill-card-enter{animation:none}
+  .skill-tag{transition:none}
+  .mission-select,.skills-grid,.stats-panel{content-visibility:auto;contain-intrinsic-size:420px}
   .header-inner { height:auto; min-height:70px; flex-wrap:wrap; padding:13px 0; gap:10px; }
   .brand { width:calc(100% - 50px); }
   .page-wrap { width:min(100% - 20px,1120px); padding-top:28px; }

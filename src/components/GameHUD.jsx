@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { BattleSystem } from './BattleSystem';
+
+const BattleSystem = lazy(() => import('./BattleSystem').then(module => ({ default: module.BattleSystem })));
 
 const areas = {
   '/': { code: '00', label: 'Base Camp', objective: 'Choose your next quest', progress: 72 },
@@ -55,19 +55,21 @@ export const GameHUD = () => {
         <i/><span>{open ? '×' : 'M'}</span>
       </button>
 
-      <AnimatePresence>
-        {open && <>
-          <motion.button className="menu-backdrop" aria-label="Close menu" onClick={() => setOpen(false)} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} />
-          <motion.aside className="pause-menu" initial={{opacity:0,scale:.94,y:20}} animate={{opacity:1,scale:1,y:0}} exit={{opacity:0,scale:.96,y:14}} transition={{type:'spring',stiffness:360,damping:30}}>
+      {open && <>
+          <button className="menu-backdrop menu-backdrop-enter" aria-label="Close menu" onClick={() => setOpen(false)} />
+          <aside className="pause-menu pause-menu-enter">
             <div className="pause-top"><div><p>GAME PAUSED</p><h2>FIELD MENU</h2></div><span>PRESS M</span></div>
             <div className="pause-player"><div className="pause-avatar">CB</div><div><small>PLAYER ONE · LV. 21</small><strong>CLARENCE BAYNA</strong><div className="pause-xp"><i style={{width:`${area.progress}%`}} /></div><p>{area.progress * 10} / 1000 XP</p></div></div>
             <nav className="pause-nav">{menu.map(([to,title,subtitle],index) => <NavLink to={to} end={to === '/'} key={to}><span>0{index}</span><div><strong>{title}</strong><small>{subtitle}</small></div><b>›</b></NavLink>)}</nav>
             <div className="current-quest"><small>CURRENT OBJECTIVE</small><p><i/> {area.objective}</p></div>
             <button className="battle-launch" onClick={() => { setOpen(false); setBattleOpen(true); }}><span>BATTLE</span><div><strong>START TRAINING</strong><small>Fight a production bug</small></div><b>→</b></button>
-          </motion.aside>
+          </aside>
         </>}
-      </AnimatePresence>
-      <AnimatePresence>{battleOpen && <BattleSystem onClose={() => setBattleOpen(false)} />}</AnimatePresence>
+      {battleOpen && (
+          <Suspense fallback={<div className="battle-loading" role="status"><i/><span>PREPARING BATTLE...</span></div>}>
+            <BattleSystem onClose={() => setBattleOpen(false)} />
+          </Suspense>
+        )}
     </>
   );
 };
