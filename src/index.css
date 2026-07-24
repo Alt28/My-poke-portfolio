@@ -304,4 +304,59 @@ p { color: #d7e1dc; line-height: 1.7; }
   .battle-overlay{padding:6px}.battle-device{padding:10px;border-radius:18px}.battle-device-top{min-height:52px}.battle-lens{width:34px;height:34px}.battle-lights{display:none}.battle-device-top strong{font-size:8px}.battle-bezel{padding:9px 9px 17px;border-radius:10px 10px 10px 25px}.battle-screen{height:305px}.battle-status{width:205px;padding:10px;border-width:3px}.enemy-status{top:12px;left:10px}.player-status{right:10px;bottom:10px}.battle-status strong{font-size:7px}.battle-status>div>span,.hp-row small{font-size:6px}.enemy-pokemon{top:72px;right:15px;width:132px;height:105px}.player-pokemon{left:-8px;bottom:32px;width:215px;height:165px}.player-pokemon.is-mega{left:-12px;bottom:35px;width:235px;height:165px}.battle-shadow{width:120px;height:22px}.enemy-shadow{top:156px;right:16px}.player-shadow{left:5px;bottom:40px;width:175px}.attack-effect.thunder{top:52px;right:0;width:165px;height:145px;transform:scale(.75)}.attack-effect.potion{left:0;width:190px}.attack-effect.potion span{left:10px;width:160px}.move-grid button{min-height:58px;padding:8px}.move-grid strong{font-size:6px}.move-grid small{font-size:7px}.battle-message{padding:14px;min-height:82px}.battle-message p{font-size:12px}.battle-controls{display:none}.battle-result h2{font-size:14px}
 }
 
+/* Phone battle placement only — keeps both Pokémon in separate arena zones. */
+@media (max-width: 600px) and (orientation: portrait) {
+  .enemy-pokemon,
+  .enemy-pokemon.is-mega {
+    top: 78px;
+    right: 10px;
+    width: 132px;
+    height: 105px;
+  }
+
+  .player-pokemon,
+  .player-pokemon.is-mega {
+    left: -8px;
+    bottom: 48px;
+    width: 188px;
+    height: 138px;
+  }
+
+  .enemy-shadow {
+    top: 157px;
+    right: 10px;
+    width: 126px;
+  }
+
+  .player-shadow {
+    left: 2px;
+    bottom: 47px;
+    width: 165px;
+  }
+
+  .attack-effect.claw {
+    top: 66px;
+    right: -8px;
+    width: 165px;
+    height: 135px;
+    transform: scale(.78);
+  }
+
+  .attack-effect.mega-player span,
+  .attack-effect.mega-enemy span {
+    width: 170px;
+    height: 170px;
+  }
+
+  .attack-effect.mega-player span {
+    left: 0;
+    bottom: 18%;
+  }
+
+  .attack-effect.mega-enemy span {
+    right: 0;
+    bottom: 35%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; } }
