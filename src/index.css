@@ -207,6 +207,8 @@ p { color: #d7e1dc; line-height: 1.7; }
 .player-pokemon{left:14px;bottom:33px;width:340px;height:255px}
 .player-pokemon.is-mega{left:5px;bottom:36px;width:370px;height:250px}.enemy-pokemon.is-mega{right:56px;width:220px;height:155px}
 .player-pokemon.fighter-lucario{left:18px;width:285px;height:225px}.player-pokemon.fighter-lucario.is-mega{left:7px;width:315px;height:235px}.player-pokemon.fighter-blastoise{left:8px;width:310px;height:230px}.player-pokemon.fighter-blastoise.is-mega{left:0;width:335px;height:240px}.player-pokemon.fighter-venusaur{left:2px;width:325px;height:235px}.player-pokemon.fighter-venusaur.is-mega{left:-3px;width:345px;height:242px}.player-pokemon.fighter-rayquaza{left:-5px;width:355px;height:255px}.player-pokemon.fighter-rayquaza.is-mega{left:-12px;width:385px;height:265px}.player-pokemon.fighter-kyogre{left:-9px;width:350px;height:245px}.player-pokemon.fighter-kyogre.is-mega{left:-15px;width:375px;height:255px}.player-pokemon.fighter-groudon{left:-2px;width:335px;height:245px}.player-pokemon.fighter-groudon.is-mega{left:-8px;width:360px;height:255px}
+.player-pokemon.fighter-rayquaza.is-mega img{animation:mega-rayquaza-hover 1.8s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(111,255,196,.45))}
+@keyframes mega-rayquaza-hover{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
 .battle-shadow{position:absolute;z-index:1;width:190px;height:32px;border-radius:50%;background:rgba(39,76,55,.2)}
 .enemy-shadow{top:196px;right:75px}.player-shadow{left:38px;bottom:43px;width:265px}
 .attack-effect{position:absolute;z-index:7;inset:0;pointer-events:none;overflow:hidden}
@@ -405,6 +407,13 @@ p { color: #d7e1dc; line-height: 1.7; }
     height: 137px;
   }
 
+  .enemy-pokemon.enemy-blastoise {
+    top: 80px;
+    right: 14px;
+    width: 124px;
+    height: 98px;
+  }
+
   .player-pokemon,
   .player-pokemon.is-mega {
     left: -8px;
@@ -429,6 +438,20 @@ p { color: #d7e1dc; line-height: 1.7; }
     bottom: 48px;
     width: 188px;
     height: 138px;
+  }
+
+  .player-pokemon.fighter-blastoise {
+    left: -2px;
+    bottom: 49px;
+    width: 168px;
+    height: 126px;
+  }
+
+  .player-pokemon.fighter-blastoise.is-mega {
+    left: -4px;
+    bottom: 48px;
+    width: 176px;
+    height: 130px;
   }
 
   .enemy-shadow {
