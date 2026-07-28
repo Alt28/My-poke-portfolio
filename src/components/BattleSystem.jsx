@@ -23,7 +23,7 @@ import lucarioFrontSprite from '../assets/pokemon/roster/lucario-front.gif';
 import megaLucarioBackSprite from '../assets/pokemon/roster/lucario-mega-back.png';
 import rayquazaBackSprite from '../assets/pokemon/roster/rayquaza-back.gif';
 import rayquazaFrontSprite from '../assets/pokemon/roster/rayquaza-front.gif';
-import megaRayquazaBackSprite from '../assets/pokemon/roster/rayquaza-mega-back.png';
+import megaRayquazaBackSprite from '../assets/pokemon/roster/rayquaza-mega-back.gif';
 import venusaurBackSprite from '../assets/pokemon/roster/venusaur-back.gif';
 import venusaurFrontSprite from '../assets/pokemon/roster/venusaur-front.gif';
 import megaVenusaurBackSprite from '../assets/pokemon/roster/venusaur-mega-back.png';
