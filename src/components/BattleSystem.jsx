@@ -10,23 +10,23 @@ import gengarSprite from '../assets/pokemon/gengar.gif';
 import megaGengarSprite from '../assets/pokemon/gengar-mega.gif';
 import mewtwoSprite from '../assets/pokemon/mewtwo.gif';
 import blastoiseBackSprite from '../assets/pokemon/roster/blastoise-back.gif';
-import megaBlastoiseBackSprite from '../assets/pokemon/roster/blastoise-mega-back.png';
+import megaBlastoiseBackSprite from '../assets/pokemon/roster/blastoise-mega-back.gif';
 import charizardFrontSprite from '../assets/pokemon/roster/charizard-front.gif';
 import groudonBackSprite from '../assets/pokemon/roster/groudon-back.gif';
 import groudonFrontSprite from '../assets/pokemon/roster/groudon-front.gif';
-import primalGroudonBackSprite from '../assets/pokemon/roster/groudon-primal-back.png';
+import primalGroudonBackSprite from '../assets/pokemon/roster/groudon-primal-back.gif';
 import kyogreBackSprite from '../assets/pokemon/roster/kyogre-back.gif';
 import kyogreFrontSprite from '../assets/pokemon/roster/kyogre-front.gif';
-import primalKyogreBackSprite from '../assets/pokemon/roster/kyogre-primal-back.png';
+import primalKyogreBackSprite from '../assets/pokemon/roster/kyogre-primal-back.gif';
 import lucarioBackSprite from '../assets/pokemon/roster/lucario-back.gif';
 import lucarioFrontSprite from '../assets/pokemon/roster/lucario-front.gif';
-import megaLucarioBackSprite from '../assets/pokemon/roster/lucario-mega-back.png';
+import megaLucarioBackSprite from '../assets/pokemon/roster/lucario-mega-back.gif';
 import rayquazaBackSprite from '../assets/pokemon/roster/rayquaza-back.gif';
 import rayquazaFrontSprite from '../assets/pokemon/roster/rayquaza-front.gif';
 import megaRayquazaBackSprite from '../assets/pokemon/roster/rayquaza-mega-back.gif';
 import venusaurBackSprite from '../assets/pokemon/roster/venusaur-back.gif';
 import venusaurFrontSprite from '../assets/pokemon/roster/venusaur-front.gif';
-import megaVenusaurBackSprite from '../assets/pokemon/roster/venusaur-mega-back.png';
+import megaVenusaurBackSprite from '../assets/pokemon/roster/venusaur-mega-back.gif';
 
 const fighterRoster = [
   {
@@ -308,16 +308,18 @@ export const BattleSystem = ({ onClose }) => {
 
   useEffect(() => {
     if (!effect) return undefined;
-    const longEffect = effect.startsWith('mega-')
-      || effect.startsWith('primal-')
-      || effect === 'level-up'
+    const transformationEffect = effect.startsWith('mega-') || effect.startsWith('primal-');
+    const longEffect = effect === 'level-up'
       || effect.includes('cannon')
       || effect.includes('plant')
       || effect.includes('meteor')
       || effect.includes('spout')
       || effect === 'eruption'
       || effect === 'close-combat';
-    const timer = window.setTimeout(() => setEffect(null), longEffect ? 1150 : 760);
+    const timer = window.setTimeout(
+      () => setEffect(null),
+      transformationEffect ? 1700 : (longEffect ? 1150 : 760),
+    );
     return () => window.clearTimeout(timer);
   }, [effect]);
 
@@ -348,12 +350,17 @@ export const BattleSystem = ({ onClose }) => {
 
   useEffect(() => {
     if (turn !== 'player-transform' || result) return undefined;
-    const timer = window.setTimeout(() => {
+    const revealTimer = window.setTimeout(() => {
       setPlayerTransformed(true);
       setMessage(`${player.name} transformed into ${player.transformedName}!`);
+    }, 780);
+    const finishTimer = window.setTimeout(() => {
       setTurn('player');
-    }, 960);
-    return () => window.clearTimeout(timer);
+    }, 1600);
+    return () => {
+      window.clearTimeout(revealTimer);
+      window.clearTimeout(finishTimer);
+    };
   }, [turn, result, player.name, player.transformedName]);
 
   useEffect(() => {
@@ -368,12 +375,17 @@ export const BattleSystem = ({ onClose }) => {
 
   useEffect(() => {
     if (turn !== 'enemy-mega' || result) return undefined;
-    const timer = window.setTimeout(() => {
+    const revealTimer = window.setTimeout(() => {
       setEnemyMega(true);
       setMessage(`${enemy.name} Mega Evolved! Its power sharply rose.`);
+    }, 780);
+    const finishTimer = window.setTimeout(() => {
       setTurn('enemy');
-    }, 900);
-    return () => window.clearTimeout(timer);
+    }, 1600);
+    return () => {
+      window.clearTimeout(revealTimer);
+      window.clearTimeout(finishTimer);
+    };
   }, [turn, result, enemy.name]);
 
   const startLevel = (nextLevel, recovered = false) => {
@@ -559,7 +571,7 @@ export const BattleSystem = ({ onClose }) => {
                         <div className="hp-row"><b>HP</b><div><i style={{ width: `${enemyHpPercent}%` }} /></div><small>{enemyHp}/{enemy.maxHp}</small></div>
                       </div>
                       <motion.div
-                        className={`pokemon-battler enemy-pokemon enemy-${enemy.slug}${enemyMega ? ' is-mega' : ''}`}
+                        className={`pokemon-battler enemy-pokemon enemy-${enemy.slug}${turn === 'enemy-mega' ? ' is-transforming' : ''}${enemyMega ? ' is-mega' : ''}`}
                         animate={effect && effectSource === 'player' ? { x: [0, -8, 8, -5, 0], filter: ['brightness(1)', 'brightness(2.4)', 'brightness(1)'] } : {}}
                       >
                         <img src={enemyMega ? enemy.megaSprite : enemy.sprite} alt={`${enemyName} battle sprite`} />
@@ -570,7 +582,7 @@ export const BattleSystem = ({ onClose }) => {
                     <div className="player-zone">
                       <span className="battle-shadow player-shadow" />
                       <motion.div
-                        className={`pokemon-battler player-pokemon fighter-${player.id}${playerTransformed ? ' is-mega' : ''}`}
+                        className={`pokemon-battler player-pokemon fighter-${player.id}${turn === 'player-transform' ? ' is-transforming' : ''}${playerTransformed ? ' is-mega' : ''}`}
                         animate={effect && effectSource === 'enemy' ? { x: [0, 7, -7, 4, 0], filter: ['brightness(1)', 'brightness(.3)', 'brightness(1)'] } : {}}
                       >
                         <img src={playerTransformed ? player.transformedSprite : player.backSprite} alt={`${playerName} facing ${enemy.name}`} />

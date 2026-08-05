@@ -207,7 +207,9 @@ p { color: #d7e1dc; line-height: 1.7; }
 .player-pokemon{left:14px;bottom:33px;width:340px;height:255px}
 .player-pokemon.is-mega{left:5px;bottom:36px;width:370px;height:250px}.enemy-pokemon.is-mega{right:56px;width:220px;height:155px}
 .player-pokemon.fighter-lucario{left:18px;width:285px;height:225px}.player-pokemon.fighter-lucario.is-mega{left:7px;width:315px;height:235px}.player-pokemon.fighter-blastoise{left:8px;width:310px;height:230px}.player-pokemon.fighter-blastoise.is-mega{left:0;width:335px;height:240px}.player-pokemon.fighter-venusaur{left:2px;width:325px;height:235px}.player-pokemon.fighter-venusaur.is-mega{left:-3px;width:345px;height:242px}.player-pokemon.fighter-rayquaza{left:-5px;width:355px;height:255px}.player-pokemon.fighter-rayquaza.is-mega{left:-12px;width:385px;height:265px}.player-pokemon.fighter-kyogre{left:-9px;width:350px;height:245px}.player-pokemon.fighter-kyogre.is-mega{left:-15px;width:375px;height:255px}.player-pokemon.fighter-groudon{left:-2px;width:335px;height:245px}.player-pokemon.fighter-groudon.is-mega{left:-8px;width:360px;height:255px}
-.player-pokemon.fighter-rayquaza.is-mega img{animation:mega-rayquaza-hover 1.8s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(111,255,196,.45))}
+.pokemon-battler.is-mega:not(.is-transforming) img{animation:mega-idle 2.2s ease-in-out infinite;filter:drop-shadow(0 0 7px rgba(116,225,255,.4))}
+.player-pokemon.fighter-rayquaza.is-mega:not(.is-transforming) img{animation:mega-rayquaza-hover 1.8s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(111,255,196,.45))}
+@keyframes mega-idle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.015)}}
 @keyframes mega-rayquaza-hover{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
 .battle-shadow{position:absolute;z-index:1;width:190px;height:32px;border-radius:50%;background:rgba(39,76,55,.2)}
 .enemy-shadow{top:196px;right:75px}.player-shadow{left:38px;bottom:43px;width:265px}
@@ -246,6 +248,13 @@ p { color: #d7e1dc; line-height: 1.7; }
 .attack-effect.mega-enemy i{left:auto;right:22%;bottom:31%;background:linear-gradient(transparent,#fff,#d964ff,transparent)}
 .attack-effect.mega-player i:nth-child(2),.attack-effect.mega-enemy i:nth-child(2){transform:rotate(60deg)}.attack-effect.mega-player i:nth-child(3),.attack-effect.mega-enemy i:nth-child(3){transform:rotate(120deg)}.attack-effect.mega-player i:nth-child(4),.attack-effect.mega-enemy i:nth-child(4){transform:rotate(180deg)}
 @keyframes mega-ring{0%{opacity:0;transform:scale(.1) rotate(0)}40%{opacity:1}75%{transform:scale(1) rotate(180deg)}100%{opacity:0;transform:scale(.25) rotate(300deg)}}@keyframes mega-rays{0%,100%{opacity:0;filter:blur(5px)}45%{opacity:1;filter:blur(0)}}@keyframes mega-screen{0%,100%{filter:brightness(1)}50%{filter:brightness(1.8) saturate(1.8)}}
+.attack-effect.mega-player,.attack-effect.mega-enemy,.attack-effect.mega-sky,.attack-effect.primal-ocean,.attack-effect.primal-land{animation-duration:1.65s}
+.attack-effect.mega-player span,.attack-effect.mega-enemy span,.attack-effect.mega-sky span,.attack-effect.primal-ocean span,.attack-effect.primal-land span{animation-duration:1.6s}
+.attack-effect.mega-player i,.attack-effect.mega-enemy i,.attack-effect.mega-sky i,.attack-effect.primal-ocean i,.attack-effect.primal-land i{animation-duration:1.55s}
+.pokemon-battler.is-transforming:not(.is-mega) img{transform-origin:center bottom;animation:mega-form-charge .78s ease-in both}
+.pokemon-battler.is-transforming.is-mega img{transform-origin:center bottom;animation:mega-form-reveal .82s cubic-bezier(.2,.8,.25,1) both}
+@keyframes mega-form-charge{0%{opacity:1;transform:scale(1);filter:brightness(1) drop-shadow(0 0 0 transparent)}45%{opacity:1;transform:scale(1.08);filter:brightness(2.4) drop-shadow(0 0 12px #9befff)}75%{opacity:.5;transform:scale(1.15);filter:brightness(5) drop-shadow(0 0 25px #fff)}100%{opacity:0;transform:scale(.55);filter:brightness(8) drop-shadow(0 0 34px #fff)}}
+@keyframes mega-form-reveal{0%{opacity:0;transform:scale(.48) rotate(-6deg);filter:brightness(8) drop-shadow(0 0 30px #fff)}45%{opacity:1;transform:scale(1.18) rotate(2deg);filter:brightness(2.3) drop-shadow(0 0 24px #75e7ff)}72%{transform:scale(.94) rotate(-1deg)}100%{opacity:1;transform:scale(1) rotate(0);filter:brightness(1) drop-shadow(0 0 8px rgba(116,225,255,.45))}}
 .attack-effect.shadow span,.attack-effect.dark span,.attack-effect.lick span{right:18%;top:32%;width:60px;height:60px;border:5px solid #e6b9ff;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#a64ee2 25%,#3b124f 70%);box-shadow:0 0 22px #9b45d5;animation:shadow-shot .72s cubic-bezier(.4,0,.4,1) both}.attack-effect.dark span{filter:hue-rotate(25deg)}.attack-effect.lick span{border-radius:60% 35% 60% 35%;background:linear-gradient(135deg,#ff9bcf,#a33a89)}
 .attack-effect.shadow i,.attack-effect.dark i,.attack-effect.lick i{right:20%;top:39%;width:30px;height:4px;background:#ac5bdb;box-shadow:35px -18px #6b2c90,55px 20px #cd85ee;animation:shadow-trail .72s both}
 @keyframes shadow-shot{65%{right:72%;top:61%}100%{right:72%;top:61%;opacity:0;transform:scale(1.8)}}@keyframes shadow-trail{65%,100%{right:68%;top:68%;opacity:0}}
@@ -491,4 +500,19 @@ p { color: #d7e1dc; line-height: 1.7; }
   }
 }
 
-@media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; }
+  .pokemon-battler.is-transforming img { animation:mega-reduced-reveal .28s ease both!important; }
+  .attack-effect.mega-player,
+  .attack-effect.mega-enemy,
+  .attack-effect.mega-sky,
+  .attack-effect.primal-ocean,
+  .attack-effect.primal-land { animation:mega-reduced-flash .32s ease both!important; }
+  .attack-effect.mega-player i,
+  .attack-effect.mega-enemy i,
+  .attack-effect.mega-sky i,
+  .attack-effect.primal-ocean i,
+  .attack-effect.primal-land i { display:none; }
+}
+@keyframes mega-reduced-reveal{0%{opacity:.35;filter:brightness(2.2)}100%{opacity:1;filter:brightness(1)}}
+@keyframes mega-reduced-flash{0%,100%{opacity:0}45%{opacity:.75}}
